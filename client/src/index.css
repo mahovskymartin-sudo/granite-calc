@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  body {
+    @apply bg-stone-950 text-stone-100 font-sans antialiased;
+    font-size: 13px;
+  }
+
+  input, select, textarea {
+    @apply bg-stone-800 border border-stone-700 text-stone-100 rounded
+           px-2 py-1 text-xs outline-none
+           focus:border-amber-500 focus:ring-1 focus:ring-amber-500/30
+           transition-colors;
+  }
+
+  input[type="number"] { @apply font-mono; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium
+           transition-all cursor-pointer select-none;
+  }
+  .btn-primary {
+    @apply btn bg-amber-500 text-stone-950 hover:bg-amber-400 active:bg-amber-600;
+  }
+  .btn-ghost {
+    @apply btn text-stone-400 hover:text-stone-100 hover:bg-stone-800;
+  }
+  .btn-danger {
+    @apply btn text-red-400 hover:text-red-300 hover:bg-red-950/40;
+  }
+
+  .card {
+    @apply bg-stone-900 border border-stone-800 rounded-lg;
+  }
+
+  .label {
+    @apply text-xs text-stone-500 font-medium uppercase tracking-wider;
+  }
+
+  /* Tabulka kalkulátoru */
+  .calc-table {
+    @apply w-full text-xs border-collapse;
+  }
+  .calc-table th {
+    @apply text-left text-stone-500 font-medium uppercase tracking-wide
+           px-2 py-1.5 border-b border-stone-800 whitespace-nowrap;
+    font-size: 10px;
+  }
+  .calc-table td {
+    @apply px-1.5 py-1 border-b border-stone-800/60;
+  }
+  .calc-table tr:hover td {
+    @apply bg-stone-800/30;
+  }
+  .calc-table tr.section-header td {
+    @apply bg-stone-800/50 text-stone-400 font-medium py-1 text-[10px] uppercase tracking-widest;
+  }
+
+  /* Mono number cells */
+  .num { @apply font-mono text-right tabular-nums; }
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { @apply bg-stone-900; }
+::-webkit-scrollbar-thumb { @apply bg-stone-700 rounded; }

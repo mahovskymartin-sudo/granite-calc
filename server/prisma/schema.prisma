@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  offers    Offer[]
+}
+
+model Offer {
+  id         String   @id @default(cuid())
+  customer   String
+  date       DateTime
+  validDays  Int      @default(14)
+  params     Json
+  lines      Json
+  totalCzk   Float
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  createdBy  String
+  user       User     @relation(fields: [createdBy], references: [id])
+}
+
+model Lom {
+  id        String   @id  // 'Lom1' | 'Lom2' | 'Lom3' | 'Lom4'
+  name      String
+  contact   String?
+  prices    Json     // { [productCode]: { h1, h2, h3 } }
+  updatedAt DateTime @updatedAt
+}
+
+model AppSettings {
+  id              String @id @default("global")
+  exchangeRate    Float  @default(5.85)
+  truckPriceBulk  Float  @default(0)
+  truckPricePallet Float @default(0)
+  defaultMarginBulk   Float @default(0.20)
+  defaultMarginPallet Float @default(0.12)
+}
